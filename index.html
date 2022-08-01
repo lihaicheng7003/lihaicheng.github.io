@@ -1,0 +1,902 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <style type="text/css">
+
+        /*
+        CSS stylesheet is based on killwing's flavored markdown style:
+        https://gist.github.com/2937864
+        */
+        body{
+            margin: 0 auto;
+            font: 13px/1.231 Helvetica, Arial, sans-serif;
+            color: #444444;
+            line-height: 1;
+            max-width: 960px;
+            padding: 5px;
+        }
+        h1, h2, h3, h4 {
+            color: #111111;
+            font-weight: 400;
+        }
+        h1, h2, h3, h4, h5, p {
+            margin-bottom: 16px;
+            padding: 0;
+        }
+        h1 {
+            font-size: 28px;
+        }
+        h2 {
+            font-size: 22px;
+            margin: 20px 0 6px;
+        }
+        h3 {
+            font-size: 21px;
+        }
+        h4 {
+            font-size: 18px;
+        }
+        h5 {
+            font-size: 16px;
+        }
+        a {
+            color: #0099ff;
+            margin: 0;
+            padding: 0;
+            vertical-align: baseline;
+        }
+        a:link,a:visited{
+        text-decoration:none;
+        }
+        a:hover{
+        text-decoration:underline;
+        }
+        ul, ol {
+            padding: 0;
+            margin: 0;
+        }
+        li {
+            line-height: 24px;
+            margin-left: 44px;
+        }
+        li ul, li ul {
+            margin-left: 24px;
+        }
+        ul, ol {
+            font-size: 14px;
+            line-height: 20px;
+            max-width: 540px;
+        }
+
+        p {
+            font-size: 14px;
+            line-height: 20px;
+            max-width: 540px;
+            margin-top: 3px;
+        }
+
+        pre {
+            padding: 0px 4px;
+            max-width: 800px;
+            white-space: pre-wrap;
+            font-family: Consolas, Monaco, Andale Mono, monospace;
+            line-height: 1.5;
+            font-size: 13px;
+            border: 1px solid #ddd;
+            background-color: #f7f7f7;
+            border-radius: 3px;
+        }
+        code {
+            font-family: Consolas, Monaco, Andale Mono, monospace;
+            line-height: 1.5;
+            font-size: 13px;
+            border: 1px solid #ddd;
+            background-color: #f7f7f7;
+            border-radius: 3px;
+        }
+        pre code {
+            border: 0px;
+        }
+        aside {
+            display: block;
+            float: right;
+            width: 390px;
+        }
+        blockquote {
+            border-left:.5em solid #40AA53;
+            padding: 0 2em;
+            margin-left:0;
+            max-width: 476px;
+        }
+        blockquote  cite {
+            font-size:14px;
+            line-height:20px;
+            color:#bfbfbf;
+        }
+        blockquote cite:before {
+            content: '\2014 \00A0';
+        }
+
+        blockquote p {  
+            color: #666;
+            max-width: 460px;
+        }
+        hr {
+            height: 1px;
+            border: none;
+            border-top: 1px dashed #0066CC
+        }
+
+        button,
+        input,
+        select,
+        textarea {
+        font-size: 100%;
+        margin: 0;
+        vertical-align: baseline;
+        *vertical-align: middle;
+        }
+        button, input {
+        line-height: normal;
+        *overflow: visible;
+        }
+        button::-moz-focus-inner, input::-moz-focus-inner {
+        border: 0;
+        padding: 0;
+        }
+        button,
+        input[type="button"],
+        input[type="reset"],
+        input[type="submit"] {
+        cursor: pointer;
+        -webkit-appearance: button;
+        }
+        input[type=checkbox], input[type=radio] {
+        cursor: pointer;
+        }
+        /* override default chrome & firefox settings */
+        input:not([type="image"]), textarea {
+        -webkit-box-sizing: content-box;
+        -moz-box-sizing: content-box;
+        box-sizing: content-box;
+        }
+
+        input[type="search"] {
+        -webkit-appearance: textfield;
+        -webkit-box-sizing: content-box;
+        -moz-box-sizing: content-box;
+        box-sizing: content-box;
+        }
+        input[type="search"]::-webkit-search-decoration {
+        -webkit-appearance: none;
+        }
+        label,
+        input,
+        select,
+        textarea {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 13px;
+        font-weight: normal;
+        line-height: normal;
+        margin-bottom: 18px;
+        }
+        input[type=checkbox], input[type=radio] {
+        cursor: pointer;
+        margin-bottom: 0;
+        }
+        input[type=text],
+        input[type=password],
+        textarea,
+        select {
+        display: inline-block;
+        width: 210px;
+        padding: 4px;
+        font-size: 13px;
+        font-weight: normal;
+        line-height: 18px;
+        height: 18px;
+        color: #808080;
+        border: 1px solid #ccc;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+        }
+        select, input[type=file] {
+        height: 27px;
+        line-height: 27px;
+        }
+        textarea {
+        height: auto;
+        }
+
+        /* grey out placeholders */
+        :-moz-placeholder {
+        color: #bfbfbf;
+        }
+        ::-webkit-input-placeholder {
+        color: #bfbfbf;
+        }
+
+        input[type=text],
+        input[type=password],
+        select,
+        textarea {
+        -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+        -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+        transition: border linear 0.2s, box-shadow linear 0.2s;
+        -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        input[type=text]:focus, input[type=password]:focus, textarea:focus {
+        outline: none;
+        border-color: rgba(82, 168, 236, 0.8);
+        -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+        -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+        }
+
+        /* buttons */
+        button {
+        display: inline-block;
+        padding: 4px 14px;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 13px;
+        line-height: 18px;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+        -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+        background-color: #0064cd;
+        background-repeat: repeat-x;
+        background-image: -khtml-gradient(linear, left top, left bottom, from(#049cdb), to(#0064cd));
+        background-image: -moz-linear-gradient(top, #049cdb, #0064cd);
+        background-image: -ms-linear-gradient(top, #049cdb, #0064cd);
+        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #049cdb), color-stop(100%, #0064cd));
+        background-image: -webkit-linear-gradient(top, #049cdb, #0064cd);
+        background-image: -o-linear-gradient(top, #049cdb, #0064cd);
+        background-image: linear-gradient(top, #049cdb, #0064cd);
+        color: #fff;
+        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+        border: 1px solid #004b9a;
+        border-bottom-color: #003f81;
+        -webkit-transition: 0.1s linear all;
+        -moz-transition: 0.1s linear all;
+        transition: 0.1s linear all;
+        border-color: #0064cd #0064cd #003f81;
+        border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+        }
+        button:hover {
+        color: #fff;
+        background-position: 0 -15px;
+        text-decoration: none;
+        }
+        button:active {
+        -webkit-box-shadow: inset 0 3px 7px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+        -moz-box-shadow: inset 0 3px 7px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+        box-shadow: inset 0 3px 7px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+        button::-moz-focus-inner {
+        padding: 0;
+        border: 0;
+        }
+        /* table  */
+        table {
+            border-spacing: 0;
+            border: 1px solid #ccc;
+        }
+        td, th{
+            border: 1px solid #ccc;
+            padding: 5px;
+        }
+        /* code syntax highlight.
+        Documentation: http://www.mdcharm.com/documentation/code_syntax_highlighting.html#custom_your_own
+        */
+        pre .literal,
+        pre .comment,
+        pre .template_comment,
+        pre .diff .header,
+        pre .javadoc {
+            color: #008000;
+        }
+
+        pre .keyword,
+        pre .css .rule .keyword,
+        pre .winutils,
+        pre .javascript .title,
+        pre .nginx .title,
+        pre .subst,
+        pre .request,
+        pre .status {
+            color: #0000FF;
+            font-weight: bold
+        }
+
+        pre .number,
+        pre .hexcolor,
+        pre .python .decorator,
+        pre .ruby .constant {
+            color: #0000FF;
+        }
+
+        pre .string,
+        pre .tag .value,
+        pre .phpdoc,
+        pre .tex .formula {
+            color: #D14
+        }
+
+        pre .title,
+        pre .id {
+            color: #900;
+            font-weight: bold
+        }
+
+        pre .javascript .title,
+        pre .lisp .title,
+        pre .clojure .title,
+        pre .subst {
+            font-weight: normal
+        }
+
+        pre .class .title,
+        pre .haskell .type,
+        pre .vhdl .literal,
+        pre .tex .command {
+            color: #458;
+            font-weight: bold
+        }
+
+        pre .tag,
+        pre .tag .title,
+        pre .rules .property,
+        pre .django .tag .keyword {
+            color: #000080;
+            font-weight: normal
+        }
+
+        pre .attribute,
+        pre .variable,
+        pre .lisp .body {
+            color: #008080
+        }
+
+        pre .regexp {
+            color: #009926
+        }
+
+        pre .class {
+            color: #458;
+            font-weight: bold
+        }
+
+        pre .symbol,
+        pre .ruby .symbol .string,
+        pre .lisp .keyword,
+        pre .tex .special,
+        pre .prompt {
+            color: #990073
+        }
+
+        pre .built_in,
+        pre .lisp .title,
+        pre .clojure .built_in {
+            color: #0086b3
+        }
+
+        pre .preprocessor,
+        pre .pi,
+        pre .doctype,
+        pre .shebang,
+        pre .cdata {
+            color: #999;
+            font-weight: bold
+        }
+
+        pre .deletion {
+            background: #fdd
+        }
+
+        pre .addition {
+            background: #dfd
+        }
+
+        pre .diff .change {
+            background: #0086b3
+        }
+
+        pre .chunk {
+            color: #aaa
+        }
+
+        pre .markdown .header {
+            color: #800;
+            font-weight: bold;
+        }
+
+        pre .markdown .blockquote {
+            color: #888;
+        }
+
+        pre .markdown .link_label {
+            color: #88F;
+        }
+
+        pre .markdown .strong {
+            font-weight: bold;
+        }
+
+        pre .markdown .emphasis {
+            font-style: italic;
+        }
+
+    </style>
+    </head>
+    <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><style>@charset "UTF-8";
+        /*
+         * PrismJS default theme
+         * 这个文件只应该包含变量
+         */
+        /*
+         * Default bear theme，适用于 core/mweb-bear.scss。
+         * 所有 bear 主题，只需 import 这个文件，然后修改配色方案即可。
+         */
+        /* font */
+        /* container */
+        /*  spacing */
+        /* color */
+        /* other */
+        /**
+         * 在 bear 的主题中，某些变量的取值和其他变量是绑定的。
+         * 统一写在这里，这个文件应该在变量文件的最后被引入。
+         */
+        /**
+         * Bear 的默认样式表。通过调整各个颜色变量的取值，就可以得到不同的 bear 主题。
+         * Bear 的配色方案位于 src/themes/bear-palettes 目录下。
+         */
+        /**
+         * PrismJS 的样式表。颜色全部用变量表示，方便后续切换不同的配色方案。
+         */
+        /* PrismJS 1.23.0
+        https://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript */
+        /**
+         * prism.js default theme for JavaScript, CSS and HTML
+         * Based on dabblet (http://dabblet.com)
+         * @author Lea Verou
+         */
+        .markdown-body {
+          /* Code blocks */
+          /* Inline code */
+        }
+        .markdown-body code[class*=language-],
+        .markdown-body pre[class*=language-] {
+          color: #222222;
+          background: none;
+          font-family: Menlo-Regular, Menlo, Monaco, Consolas, "Courier New", monospace;
+          font-size: 1em;
+          text-align: left;
+          white-space: pre;
+          word-spacing: normal;
+          word-break: normal;
+          word-wrap: normal;
+          line-height: 1.5rem;
+          -moz-tab-size: 4;
+          -o-tab-size: 4;
+          tab-size: 4;
+          -webkit-hyphens: none;
+          -moz-hyphens: none;
+          -ms-hyphens: none;
+          hyphens: none;
+        }
+        .markdown-body pre[class*=language-]::-moz-selection, .markdown-body pre[class*=language-] ::-moz-selection,
+        .markdown-body code[class*=language-]::-moz-selection, .markdown-body code[class*=language-] ::-moz-selection {
+          text-shadow: none;
+          background: #b3d4fc;
+        }
+        .markdown-body pre[class*=language-]::selection, .markdown-body pre[class*=language-] ::selection,
+        .markdown-body code[class*=language-]::selection, .markdown-body code[class*=language-] ::selection {
+          text-shadow: none;
+          background: #b3d4fc;
+        }
+        @media print {
+          .markdown-body code[class*=language-],
+        .markdown-body pre[class*=language-] {
+            text-shadow: none;
+          }
+        }
+        .markdown-body pre[class*=language-] {
+          padding: 1em;
+          margin: 0.5em 0;
+          overflow: auto;
+        }
+        .markdown-body :not(pre) > code[class*=language-],
+        .markdown-body pre[class*=language-] {
+          background: white;
+        }
+        .markdown-body :not(pre) > code[class*=language-] {
+          padding: 0.1em;
+          border-radius: 0.3em;
+          white-space: normal;
+        }
+        .markdown-body .token.comment,
+        .markdown-body .token.prolog,
+        .markdown-body .token.doctype,
+        .markdown-body .token.cdata {
+          color: #575757;
+        }
+        .markdown-body .token.punctuation {
+          color: #999;
+        }
+        .markdown-body .token.namespace {
+          opacity: 0.7;
+        }
+        .markdown-body .token.number,
+        .markdown-body .token.boolean {
+          color: #0b5d83;
+        }
+        .markdown-body .token.property,
+        .markdown-body .token.tag,
+        .markdown-body .token.constant,
+        .markdown-body .token.symbol,
+        .markdown-body .token.deleted {
+          color: #905;
+        }
+        .markdown-body .token.selector,
+        .markdown-body .token.string,
+        .markdown-body .token.char,
+        .markdown-body .token.builtin,
+        .markdown-body .token.inserted {
+          color: #b43d15;
+        }
+        .markdown-body .token.attr-name {
+          color: #b43d15;
+        }
+        .markdown-body .token.char {
+          color: #b43d15;
+        }
+        .markdown-body .token.operator,
+        .markdown-body .token.entity,
+        .markdown-body .token.url,
+        .markdown-body .language-css .token.string,
+        .markdown-body .style .token.string {
+          color: #920448;
+          background: none;
+        }
+        .markdown-body .token.atrule,
+        .markdown-body .token.attr-value,
+        .markdown-body .token.keyword {
+          color: #2478c5;
+        }
+        .markdown-body .token.function,
+        .markdown-body .token.class-name {
+          color: #2478c5;
+        }
+        .markdown-body .token.regex,
+        .markdown-body .token.important,
+        .markdown-body .token.variable {
+          color: #0E73A2;
+        }
+        .markdown-body .token.important,
+        .markdown-body .token.bold {
+          font-weight: bold;
+        }
+        .markdown-body .token.italic {
+          font-style: italic;
+        }
+        .markdown-body .token.entity {
+          cursor: help;
+        }
+        
+        html {
+          font-family: AvenirNext-Regular, -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
+          font-size: 16px;
+          color: #222222;
+        }
+        
+        body {
+          background-color: #fcfcfc;
+          line-height: 1.6em;
+          -webkit-text-size-adjust: 100%;
+          max-width: 46rem;
+          margin: 0px auto;
+          padding: 1.6em 3.2em;
+        }
+        
+        .markdown-body * {
+          -moz-box-sizing: border-box;
+          -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+          -webkit-font-smoothing: antialiased;
+          text-rendering: optimizeLegibility;
+        }
+        .markdown-body > *:first-child {
+          margin-top: 0 !important;
+        }
+        .markdown-body > *:last-child {
+          margin-top: 0 !important;
+        }
+        .markdown-body p, .markdown-body pre, .markdown-body ul, .markdown-body ol, .markdown-body dl, .markdown-body form, .markdown-body details, .markdown-body dl, .markdown-body blockquote, .markdown-body table, .markdown-body xmp, .markdown-body plaintext, .markdown-body listing, .markdown-body figure,
+        .markdown-body pre[class*=language-] {
+          margin: 0.75em 0 0.45em;
+        }
+        .markdown-body hr {
+          margin: 0.75em auto;
+        }
+        .markdown-body ul ul, .markdown-body ul ol, .markdown-body ol ul, .markdown-body ol ol {
+          margin-bottom: 0px;
+        }
+        .markdown-body h1, .markdown-body h2, .markdown-body h3, .markdown-body h4, .markdown-body h5, .markdown-body h6 {
+          margin-top: 1.5em;
+          margin-bottom: 0.75em;
+          margin-left: 0;
+          margin-right: 0;
+          font-family: AvenirNext-Medium;
+          font-weight: 500;
+          line-height: 1.5em;
+          color: #262626;
+        }
+        .markdown-body h1 {
+          font-size: 1.5em;
+        }
+        .markdown-body h2 {
+          font-size: 1.3em;
+        }
+        .markdown-body h3 {
+          font-size: 1.1em;
+        }
+        .markdown-body h4 {
+          font-size: 1em;
+        }
+        .markdown-body h5 {
+          font-size: 1em;
+        }
+        .markdown-body h6 {
+          font-size: 1em;
+        }
+        .markdown-body hr {
+          height: 1px;
+          border: 0;
+          background-color: #bfbfbf;
+          border-style: inset;
+          border-width: 1px;
+        }
+        .markdown-body p {
+          margin-left: 0;
+          margin-right: 0;
+        }
+        .markdown-body pre, .markdown-body pre[class*=language-] {
+          padding: 0;
+          border: 0;
+        }
+        .markdown-body blockquote {
+          display: block;
+          padding-left: 0.8em;
+          border-left: 0.2em solid #e06e73;
+        }
+        .markdown-body blockquote > :first-child {
+          margin-top: 0;
+        }
+        .markdown-body blockquote > :last-child {
+          margin-bottom: 0;
+        }
+        .markdown-body li {
+          word-wrap: break-all;
+        }
+        .markdown-body ul, .markdown-body ol {
+          list-style: none;
+        }
+        .markdown-body ul {
+          margin-left: 1.3em;
+          padding: 0;
+        }
+        .markdown-body ol {
+          margin-left: 1.3em;
+          padding: 0;
+          counter-reset: ol_counter;
+        }
+        .markdown-body ul li {
+          position: relative;
+        }
+        .markdown-body ul li:before {
+          content: "•";
+          color: #e06e73;
+          position: absolute;
+          left: -1.1em;
+        }
+        .markdown-body ol li {
+          position: relative;
+        }
+        .markdown-body ol li:before {
+          content: counter(ol_counter) ".";
+          counter-increment: ol_counter;
+          color: #e06e73;
+          text-align: right;
+          min-width: 1em;
+          position: absolute;
+          left: -1.5em;
+        }
+        .markdown-body li + li {
+          margin-top: 0.25em;
+        }
+        .markdown-body ul ul, .markdown-body ol ul, .markdown-body ul ol, .markdown-body ol ol, .markdown-body li ul, .markdown-body li ol {
+          margin-top: 0.25em;
+          margin-left: 2em;
+        }
+        .markdown-body .task-list-item {
+          list-style-type: none;
+          text-indent: -1.5em;
+        }
+        .markdown-body .task-list-item:before {
+          content: "";
+          display: static;
+          margin-right: 0px;
+        }
+        .markdown-body .task-list-item > input[type=checkbox] {
+          text-indent: -1.7em;
+        }
+        .markdown-body img {
+          max-width: 100%;
+          height: auto;
+        }
+        .markdown-body u {
+          text-decoration: none;
+          background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, #e06e73 50%);
+          background-repeat: repeat-x;
+          background-size: 2px 2px;
+          background-position: 0 1em;
+        }
+        .markdown-body a {
+          color: #de4c4f;
+          text-decoration: none;
+        }
+        .markdown-body a:hover, .markdown-body a:focus, .markdown-body a:active {
+          text-decoration: underline;
+        }
+        .markdown-body a img {
+          border: none;
+        }
+        .markdown-body b, .markdown-body strong {
+          font-weight: bold;
+        }
+        .markdown-body i, .markdown-body cite, .markdown-body em, .markdown-body var, .markdown-body address, .markdown-body dfn {
+          font-style: italic;
+        }
+        .markdown-body del, .markdown-body s {
+          color: #525252;
+        }
+        .markdown-body pre, .markdown-body xmp, .markdown-body plaintext, .markdown-body listing, .markdown-body code, .markdown-body kbd, .markdown-body tt, .markdown-body samp {
+          font-family: Menlo-Regular, Menlo, Monaco, Consolas, "Courier New", monospace;
+        }
+        .markdown-body code {
+          display: inline;
+          border: solid 1px #bfbfbf;
+          padding: 0.2em 0.5em;
+          font-size: 0.9em;
+          color: #424242;
+          background-color: white;
+        }
+        .markdown-body pre > code {
+          display: block;
+          border: solid 1px #bfbfbf;
+          padding: 0.7em 1em;
+          font-size: 0.9em;
+          overflow-x: auto;
+        }
+        .markdown-body mark {
+          color: inherit;
+          display: inline;
+          padding: 0.2em 0.5em;
+          background-color: #fcffc0;
+        }
+        .markdown-body figcaption {
+          text-align: center;
+        }
+        .markdown-body table {
+          color: #424242;
+          border-collapse: collapse;
+          background-color: white;
+          border-spacing: 2px;
+          font-size: 1em;
+          border: 1px;
+          border-spacing: 0;
+        }
+        .markdown-body th, .markdown-body td {
+          padding: 0.7em 1em;
+          font-size: 0.9em;
+          border: 1px solid #bfbfbf;
+        }
+        .markdown-body caption, .markdown-body th, .markdown-body td {
+          text-align: left;
+          font-weight: normal;
+          vertical-align: middle;
+        }
+        .markdown-body div[id^=mweb-chart-ele] svg {
+          background-color: white;
+        }
+        .markdown-body .footnotes > ol li {
+          text-indent: 0;
+        }
+        .markdown-body .footnotes > ol li::before {
+          float: left;
+        }
+        </style>
+        <style>.mweb-charts{background:#fff;}
+        body{ box-sizing: border-box;
+            margin: 0 auto;
+            padding: 28px}
+        @media print{
+            code,pre,pre code{
+                overflow: visible; word-wrap: break-word !important;
+            }
+            html,body{margin:0;padding:4px;}
+        }
+        
+        </style>
+        <script>window.MathJax = {     tex: { tags: 'ams', displayMath: [ ['\\[', '\\]'] ] },     startup: {     pageReady() {       return MathJax.startup.defaultPageReady().then(function () {          window.mweb_mathjax_ready_val = 'yes';          if(window.mweb_mathjax_ready !== undefined){ mweb_mathjax_ready(); }       });     }   }};document.addEventListener('DOMContentLoaded', function(event) {    if (typeof Prism != 'undefined') {         Prism.highlightAll();     }});window.mweb_mathjax_ready_val = '';function theMWebMathJaxRenderIsReady(key){ return window.mweb_mathjax_ready_val; }</script><script>document.addEventListener('DOMContentLoaded', function(event) {window.mweb_mathjax_ready_val = 'yes';})</script>
+        </head>
+<body data-new-gr-c-s-check-loaded="14.1071.0" data-gr-ext-installed="">
+
+<h1><strong>李海成</strong></h1>
+
+<h1></h1>
+
+<p><br>
+在读硕士, 生物信息, 内蒙古大学</p>
+
+<p>Email: lihaicheng7003@163.com
+Github: <a href="https://github.com/lihaicheng7003">https://github.com/lihaicheng7003</a></p>
+
+<p><img src="./lihaicheng_files/me.jpg" ,="" width="300"></p>
+
+<h2>SUMMARY</h2>
+<ul></ul>
+<p>目前就读于内蒙古大学，生物信息方向。主要方向是<strong>胚胎发育</strong>，也做过微生物。 </p>
+
+
+
+<h2><a id="education" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>EDUCATION</h2>
+<ul></ul>
+<p><strong>内蒙古大学</strong> (2020.09-至今)<br>
+    在读硕士，生物信息学方向</p>
+<ul>
+    <li>研究方向: 胚胎发育</li>
+    <li>开发生物信息学机器学习预测、工具、平台。</li>
+</ul>
+
+<p><strong>南京理工大学</strong> (2015.09-2019.07)<br>
+    工学学士，生物工程</p>
+<ul>
+    <li>毕业设计: 金花茶天然产物分离</li>
+</ul>
+<h2><a id="technical-skills" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>TECHNICAL SKILLS</h2>
+<ul></ul>
+<p><strong>NGS 数据分析</strong></p>
+<ul>
+    <li>数据处理: WGS, ChIP-Seq, RNA-Seq, ATAC-Seq and WGBS</li>
+    <li>公共数据挖掘: GEO, Ensembl</li>
+</ul>
+<p><strong>编程</strong></p>
+<ul>
+    <li>python, R, Bash, SQL, Git</li>
+    <li>工作环境管理: Snakemake, Conda, Docker</li>
+    <li>linux 服务器操作与维护</li>
+
+</ul>
+   
+<h2><a id="publications" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>PUBLICATIONS<br></h2>
+<ul></ul>
+<blockquote>
+    <p>#, Co-first author;&nbsp;&nbsp;*, Corresponding author</p>
+    </blockquote>
+<ul>
+    <li>Yu Sun, <strong>Haicheng Li</strong>#, Lei Zheng, Jinzhao Li, Yan Hong, Pengfei Liang, Lai-Yu Kwok, Yongchun Zuo, Wenyi Zhang, Heping Zhang. (2021).iProbiotics: a machine learning platform for rapid identification of probiotic properties from whole-genome primary sequences. <em><strong>Briefings in Bioinformatics</strong></em>,Volume 23, Issue 1, January 2022, bbab477, https://doi.org/10.1093/bib/bbab477.</li>
+    <li>Liang Pengfei, Wang Hao, Liang Yuchao, Zhou Jian, <strong>Li Haicheng</strong> and Zuo Yongchun*. (2022).Feature-scML: an open-source Python package for the feature importance visualization of single-cell omics with machine learning, <em><strong>Current Bioinformatics</strong></em>, 17() . https://dx.doi.org/10.2174/1574893617666220608123804</li>
+    
+    </ul>
+<blockquote>
+    <p>Lasted updated on 2022-8-1</p>
+    </blockquote>
+

@@ -1,949 +1,902 @@
-<!DOCTYPE HTML>
-<html lang="zh-CN">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <style type="text/css">
+
+        /*
+        CSS stylesheet is based on killwing's flavored markdown style:
+        https://gist.github.com/2937864
+        */
+        body{
+            margin: 0 auto;
+            font: 13px/1.231 Helvetica, Arial, sans-serif;
+            color: #444444;
+            line-height: 1;
+            max-width: 960px;
+            padding: 5px;
+        }
+        h1, h2, h3, h4 {
+            color: #111111;
+            font-weight: 400;
+        }
+        h1, h2, h3, h4, h5, p {
+            margin-bottom: 16px;
+            padding: 0;
+        }
+        h1 {
+            font-size: 28px;
+        }
+        h2 {
+            font-size: 22px;
+            margin: 20px 0 6px;
+        }
+        h3 {
+            font-size: 21px;
+        }
+        h4 {
+            font-size: 18px;
+        }
+        h5 {
+            font-size: 16px;
+        }
+        a {
+            color: #0099ff;
+            margin: 0;
+            padding: 0;
+            vertical-align: baseline;
+        }
+        a:link,a:visited{
+        text-decoration:none;
+        }
+        a:hover{
+        text-decoration:underline;
+        }
+        ul, ol {
+            padding: 0;
+            margin: 0;
+        }
+        li {
+            line-height: 24px;
+            margin-left: 44px;
+        }
+        li ul, li ul {
+            margin-left: 24px;
+        }
+        ul, ol {
+            font-size: 14px;
+            line-height: 20px;
+            max-width: 540px;
+        }
+
+        p {
+            font-size: 14px;
+            line-height: 20px;
+            max-width: 540px;
+            margin-top: 3px;
+        }
+
+        pre {
+            padding: 0px 4px;
+            max-width: 800px;
+            white-space: pre-wrap;
+            font-family: Consolas, Monaco, Andale Mono, monospace;
+            line-height: 1.5;
+            font-size: 13px;
+            border: 1px solid #ddd;
+            background-color: #f7f7f7;
+            border-radius: 3px;
+        }
+        code {
+            font-family: Consolas, Monaco, Andale Mono, monospace;
+            line-height: 1.5;
+            font-size: 13px;
+            border: 1px solid #ddd;
+            background-color: #f7f7f7;
+            border-radius: 3px;
+        }
+        pre code {
+            border: 0px;
+        }
+        aside {
+            display: block;
+            float: right;
+            width: 390px;
+        }
+        blockquote {
+            border-left:.5em solid #40AA53;
+            padding: 0 2em;
+            margin-left:0;
+            max-width: 476px;
+        }
+        blockquote  cite {
+            font-size:14px;
+            line-height:20px;
+            color:#bfbfbf;
+        }
+        blockquote cite:before {
+            content: '\2014 \00A0';
+        }
+
+        blockquote p {  
+            color: #666;
+            max-width: 460px;
+        }
+        hr {
+            height: 1px;
+            border: none;
+            border-top: 1px dashed #0066CC
+        }
+
+        button,
+        input,
+        select,
+        textarea {
+        font-size: 100%;
+        margin: 0;
+        vertical-align: baseline;
+        *vertical-align: middle;
+        }
+        button, input {
+        line-height: normal;
+        *overflow: visible;
+        }
+        button::-moz-focus-inner, input::-moz-focus-inner {
+        border: 0;
+        padding: 0;
+        }
+        button,
+        input[type="button"],
+        input[type="reset"],
+        input[type="submit"] {
+        cursor: pointer;
+        -webkit-appearance: button;
+        }
+        input[type=checkbox], input[type=radio] {
+        cursor: pointer;
+        }
+        /* override default chrome & firefox settings */
+        input:not([type="image"]), textarea {
+        -webkit-box-sizing: content-box;
+        -moz-box-sizing: content-box;
+        box-sizing: content-box;
+        }
+
+        input[type="search"] {
+        -webkit-appearance: textfield;
+        -webkit-box-sizing: content-box;
+        -moz-box-sizing: content-box;
+        box-sizing: content-box;
+        }
+        input[type="search"]::-webkit-search-decoration {
+        -webkit-appearance: none;
+        }
+        label,
+        input,
+        select,
+        textarea {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 13px;
+        font-weight: normal;
+        line-height: normal;
+        margin-bottom: 18px;
+        }
+        input[type=checkbox], input[type=radio] {
+        cursor: pointer;
+        margin-bottom: 0;
+        }
+        input[type=text],
+        input[type=password],
+        textarea,
+        select {
+        display: inline-block;
+        width: 210px;
+        padding: 4px;
+        font-size: 13px;
+        font-weight: normal;
+        line-height: 18px;
+        height: 18px;
+        color: #808080;
+        border: 1px solid #ccc;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+        }
+        select, input[type=file] {
+        height: 27px;
+        line-height: 27px;
+        }
+        textarea {
+        height: auto;
+        }
+
+        /* grey out placeholders */
+        :-moz-placeholder {
+        color: #bfbfbf;
+        }
+        ::-webkit-input-placeholder {
+        color: #bfbfbf;
+        }
+
+        input[type=text],
+        input[type=password],
+        select,
+        textarea {
+        -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+        -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+        transition: border linear 0.2s, box-shadow linear 0.2s;
+        -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        input[type=text]:focus, input[type=password]:focus, textarea:focus {
+        outline: none;
+        border-color: rgba(82, 168, 236, 0.8);
+        -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+        -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+        }
+
+        /* buttons */
+        button {
+        display: inline-block;
+        padding: 4px 14px;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 13px;
+        line-height: 18px;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+        -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+        background-color: #0064cd;
+        background-repeat: repeat-x;
+        background-image: -khtml-gradient(linear, left top, left bottom, from(#049cdb), to(#0064cd));
+        background-image: -moz-linear-gradient(top, #049cdb, #0064cd);
+        background-image: -ms-linear-gradient(top, #049cdb, #0064cd);
+        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #049cdb), color-stop(100%, #0064cd));
+        background-image: -webkit-linear-gradient(top, #049cdb, #0064cd);
+        background-image: -o-linear-gradient(top, #049cdb, #0064cd);
+        background-image: linear-gradient(top, #049cdb, #0064cd);
+        color: #fff;
+        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+        border: 1px solid #004b9a;
+        border-bottom-color: #003f81;
+        -webkit-transition: 0.1s linear all;
+        -moz-transition: 0.1s linear all;
+        transition: 0.1s linear all;
+        border-color: #0064cd #0064cd #003f81;
+        border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+        }
+        button:hover {
+        color: #fff;
+        background-position: 0 -15px;
+        text-decoration: none;
+        }
+        button:active {
+        -webkit-box-shadow: inset 0 3px 7px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+        -moz-box-shadow: inset 0 3px 7px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+        box-shadow: inset 0 3px 7px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+        button::-moz-focus-inner {
+        padding: 0;
+        border: 0;
+        }
+        /* table  */
+        table {
+            border-spacing: 0;
+            border: 1px solid #ccc;
+        }
+        td, th{
+            border: 1px solid #ccc;
+            padding: 5px;
+        }
+        /* code syntax highlight.
+        Documentation: http://www.mdcharm.com/documentation/code_syntax_highlighting.html#custom_your_own
+        */
+        pre .literal,
+        pre .comment,
+        pre .template_comment,
+        pre .diff .header,
+        pre .javadoc {
+            color: #008000;
+        }
+
+        pre .keyword,
+        pre .css .rule .keyword,
+        pre .winutils,
+        pre .javascript .title,
+        pre .nginx .title,
+        pre .subst,
+        pre .request,
+        pre .status {
+            color: #0000FF;
+            font-weight: bold
+        }
+
+        pre .number,
+        pre .hexcolor,
+        pre .python .decorator,
+        pre .ruby .constant {
+            color: #0000FF;
+        }
+
+        pre .string,
+        pre .tag .value,
+        pre .phpdoc,
+        pre .tex .formula {
+            color: #D14
+        }
+
+        pre .title,
+        pre .id {
+            color: #900;
+            font-weight: bold
+        }
+
+        pre .javascript .title,
+        pre .lisp .title,
+        pre .clojure .title,
+        pre .subst {
+            font-weight: normal
+        }
+
+        pre .class .title,
+        pre .haskell .type,
+        pre .vhdl .literal,
+        pre .tex .command {
+            color: #458;
+            font-weight: bold
+        }
+
+        pre .tag,
+        pre .tag .title,
+        pre .rules .property,
+        pre .django .tag .keyword {
+            color: #000080;
+            font-weight: normal
+        }
+
+        pre .attribute,
+        pre .variable,
+        pre .lisp .body {
+            color: #008080
+        }
+
+        pre .regexp {
+            color: #009926
+        }
+
+        pre .class {
+            color: #458;
+            font-weight: bold
+        }
+
+        pre .symbol,
+        pre .ruby .symbol .string,
+        pre .lisp .keyword,
+        pre .tex .special,
+        pre .prompt {
+            color: #990073
+        }
+
+        pre .built_in,
+        pre .lisp .title,
+        pre .clojure .built_in {
+            color: #0086b3
+        }
+
+        pre .preprocessor,
+        pre .pi,
+        pre .doctype,
+        pre .shebang,
+        pre .cdata {
+            color: #999;
+            font-weight: bold
+        }
+
+        pre .deletion {
+            background: #fdd
+        }
+
+        pre .addition {
+            background: #dfd
+        }
+
+        pre .diff .change {
+            background: #0086b3
+        }
+
+        pre .chunk {
+            color: #aaa
+        }
+
+        pre .markdown .header {
+            color: #800;
+            font-weight: bold;
+        }
+
+        pre .markdown .blockquote {
+            color: #888;
+        }
+
+        pre .markdown .link_label {
+            color: #88F;
+        }
+
+        pre .markdown .strong {
+            font-weight: bold;
+        }
+
+        pre .markdown .emphasis {
+            font-style: italic;
+        }
+
+    </style>
+    </head>
+    <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><style>@charset "UTF-8";
+        /*
+         * PrismJS default theme
+         * 这个文件只应该包含变量
+         */
+        /*
+         * Default bear theme，适用于 core/mweb-bear.scss。
+         * 所有 bear 主题，只需 import 这个文件，然后修改配色方案即可。
+         */
+        /* font */
+        /* container */
+        /*  spacing */
+        /* color */
+        /* other */
+        /**
+         * 在 bear 的主题中，某些变量的取值和其他变量是绑定的。
+         * 统一写在这里，这个文件应该在变量文件的最后被引入。
+         */
+        /**
+         * Bear 的默认样式表。通过调整各个颜色变量的取值，就可以得到不同的 bear 主题。
+         * Bear 的配色方案位于 src/themes/bear-palettes 目录下。
+         */
+        /**
+         * PrismJS 的样式表。颜色全部用变量表示，方便后续切换不同的配色方案。
+         */
+        /* PrismJS 1.23.0
+        https://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript */
+        /**
+         * prism.js default theme for JavaScript, CSS and HTML
+         * Based on dabblet (http://dabblet.com)
+         * @author Lea Verou
+         */
+        .markdown-body {
+          /* Code blocks */
+          /* Inline code */
+        }
+        .markdown-body code[class*=language-],
+        .markdown-body pre[class*=language-] {
+          color: #222222;
+          background: none;
+          font-family: Menlo-Regular, Menlo, Monaco, Consolas, "Courier New", monospace;
+          font-size: 1em;
+          text-align: left;
+          white-space: pre;
+          word-spacing: normal;
+          word-break: normal;
+          word-wrap: normal;
+          line-height: 1.5rem;
+          -moz-tab-size: 4;
+          -o-tab-size: 4;
+          tab-size: 4;
+          -webkit-hyphens: none;
+          -moz-hyphens: none;
+          -ms-hyphens: none;
+          hyphens: none;
+        }
+        .markdown-body pre[class*=language-]::-moz-selection, .markdown-body pre[class*=language-] ::-moz-selection,
+        .markdown-body code[class*=language-]::-moz-selection, .markdown-body code[class*=language-] ::-moz-selection {
+          text-shadow: none;
+          background: #b3d4fc;
+        }
+        .markdown-body pre[class*=language-]::selection, .markdown-body pre[class*=language-] ::selection,
+        .markdown-body code[class*=language-]::selection, .markdown-body code[class*=language-] ::selection {
+          text-shadow: none;
+          background: #b3d4fc;
+        }
+        @media print {
+          .markdown-body code[class*=language-],
+        .markdown-body pre[class*=language-] {
+            text-shadow: none;
+          }
+        }
+        .markdown-body pre[class*=language-] {
+          padding: 1em;
+          margin: 0.5em 0;
+          overflow: auto;
+        }
+        .markdown-body :not(pre) > code[class*=language-],
+        .markdown-body pre[class*=language-] {
+          background: white;
+        }
+        .markdown-body :not(pre) > code[class*=language-] {
+          padding: 0.1em;
+          border-radius: 0.3em;
+          white-space: normal;
+        }
+        .markdown-body .token.comment,
+        .markdown-body .token.prolog,
+        .markdown-body .token.doctype,
+        .markdown-body .token.cdata {
+          color: #575757;
+        }
+        .markdown-body .token.punctuation {
+          color: #999;
+        }
+        .markdown-body .token.namespace {
+          opacity: 0.7;
+        }
+        .markdown-body .token.number,
+        .markdown-body .token.boolean {
+          color: #0b5d83;
+        }
+        .markdown-body .token.property,
+        .markdown-body .token.tag,
+        .markdown-body .token.constant,
+        .markdown-body .token.symbol,
+        .markdown-body .token.deleted {
+          color: #905;
+        }
+        .markdown-body .token.selector,
+        .markdown-body .token.string,
+        .markdown-body .token.char,
+        .markdown-body .token.builtin,
+        .markdown-body .token.inserted {
+          color: #b43d15;
+        }
+        .markdown-body .token.attr-name {
+          color: #b43d15;
+        }
+        .markdown-body .token.char {
+          color: #b43d15;
+        }
+        .markdown-body .token.operator,
+        .markdown-body .token.entity,
+        .markdown-body .token.url,
+        .markdown-body .language-css .token.string,
+        .markdown-body .style .token.string {
+          color: #920448;
+          background: none;
+        }
+        .markdown-body .token.atrule,
+        .markdown-body .token.attr-value,
+        .markdown-body .token.keyword {
+          color: #2478c5;
+        }
+        .markdown-body .token.function,
+        .markdown-body .token.class-name {
+          color: #2478c5;
+        }
+        .markdown-body .token.regex,
+        .markdown-body .token.important,
+        .markdown-body .token.variable {
+          color: #0E73A2;
+        }
+        .markdown-body .token.important,
+        .markdown-body .token.bold {
+          font-weight: bold;
+        }
+        .markdown-body .token.italic {
+          font-style: italic;
+        }
+        .markdown-body .token.entity {
+          cursor: help;
+        }
+        
+        html {
+          font-family: AvenirNext-Regular, -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
+          font-size: 16px;
+          color: #222222;
+        }
+        
+        body {
+          background-color: #fcfcfc;
+          line-height: 1.6em;
+          -webkit-text-size-adjust: 100%;
+          max-width: 46rem;
+          margin: 0px auto;
+          padding: 1.6em 3.2em;
+        }
+        
+        .markdown-body * {
+          -moz-box-sizing: border-box;
+          -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+          -webkit-font-smoothing: antialiased;
+          text-rendering: optimizeLegibility;
+        }
+        .markdown-body > *:first-child {
+          margin-top: 0 !important;
+        }
+        .markdown-body > *:last-child {
+          margin-top: 0 !important;
+        }
+        .markdown-body p, .markdown-body pre, .markdown-body ul, .markdown-body ol, .markdown-body dl, .markdown-body form, .markdown-body details, .markdown-body dl, .markdown-body blockquote, .markdown-body table, .markdown-body xmp, .markdown-body plaintext, .markdown-body listing, .markdown-body figure,
+        .markdown-body pre[class*=language-] {
+          margin: 0.75em 0 0.45em;
+        }
+        .markdown-body hr {
+          margin: 0.75em auto;
+        }
+        .markdown-body ul ul, .markdown-body ul ol, .markdown-body ol ul, .markdown-body ol ol {
+          margin-bottom: 0px;
+        }
+        .markdown-body h1, .markdown-body h2, .markdown-body h3, .markdown-body h4, .markdown-body h5, .markdown-body h6 {
+          margin-top: 1.5em;
+          margin-bottom: 0.75em;
+          margin-left: 0;
+          margin-right: 0;
+          font-family: AvenirNext-Medium;
+          font-weight: 500;
+          line-height: 1.5em;
+          color: #262626;
+        }
+        .markdown-body h1 {
+          font-size: 1.5em;
+        }
+        .markdown-body h2 {
+          font-size: 1.3em;
+        }
+        .markdown-body h3 {
+          font-size: 1.1em;
+        }
+        .markdown-body h4 {
+          font-size: 1em;
+        }
+        .markdown-body h5 {
+          font-size: 1em;
+        }
+        .markdown-body h6 {
+          font-size: 1em;
+        }
+        .markdown-body hr {
+          height: 1px;
+          border: 0;
+          background-color: #bfbfbf;
+          border-style: inset;
+          border-width: 1px;
+        }
+        .markdown-body p {
+          margin-left: 0;
+          margin-right: 0;
+        }
+        .markdown-body pre, .markdown-body pre[class*=language-] {
+          padding: 0;
+          border: 0;
+        }
+        .markdown-body blockquote {
+          display: block;
+          padding-left: 0.8em;
+          border-left: 0.2em solid #e06e73;
+        }
+        .markdown-body blockquote > :first-child {
+          margin-top: 0;
+        }
+        .markdown-body blockquote > :last-child {
+          margin-bottom: 0;
+        }
+        .markdown-body li {
+          word-wrap: break-all;
+        }
+        .markdown-body ul, .markdown-body ol {
+          list-style: none;
+        }
+        .markdown-body ul {
+          margin-left: 1.3em;
+          padding: 0;
+        }
+        .markdown-body ol {
+          margin-left: 1.3em;
+          padding: 0;
+          counter-reset: ol_counter;
+        }
+        .markdown-body ul li {
+          position: relative;
+        }
+        .markdown-body ul li:before {
+          content: "•";
+          color: #e06e73;
+          position: absolute;
+          left: -1.1em;
+        }
+        .markdown-body ol li {
+          position: relative;
+        }
+        .markdown-body ol li:before {
+          content: counter(ol_counter) ".";
+          counter-increment: ol_counter;
+          color: #e06e73;
+          text-align: right;
+          min-width: 1em;
+          position: absolute;
+          left: -1.5em;
+        }
+        .markdown-body li + li {
+          margin-top: 0.25em;
+        }
+        .markdown-body ul ul, .markdown-body ol ul, .markdown-body ul ol, .markdown-body ol ol, .markdown-body li ul, .markdown-body li ol {
+          margin-top: 0.25em;
+          margin-left: 2em;
+        }
+        .markdown-body .task-list-item {
+          list-style-type: none;
+          text-indent: -1.5em;
+        }
+        .markdown-body .task-list-item:before {
+          content: "";
+          display: static;
+          margin-right: 0px;
+        }
+        .markdown-body .task-list-item > input[type=checkbox] {
+          text-indent: -1.7em;
+        }
+        .markdown-body img {
+          max-width: 100%;
+          height: auto;
+        }
+        .markdown-body u {
+          text-decoration: none;
+          background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, #e06e73 50%);
+          background-repeat: repeat-x;
+          background-size: 2px 2px;
+          background-position: 0 1em;
+        }
+        .markdown-body a {
+          color: #de4c4f;
+          text-decoration: none;
+        }
+        .markdown-body a:hover, .markdown-body a:focus, .markdown-body a:active {
+          text-decoration: underline;
+        }
+        .markdown-body a img {
+          border: none;
+        }
+        .markdown-body b, .markdown-body strong {
+          font-weight: bold;
+        }
+        .markdown-body i, .markdown-body cite, .markdown-body em, .markdown-body var, .markdown-body address, .markdown-body dfn {
+          font-style: italic;
+        }
+        .markdown-body del, .markdown-body s {
+          color: #525252;
+        }
+        .markdown-body pre, .markdown-body xmp, .markdown-body plaintext, .markdown-body listing, .markdown-body code, .markdown-body kbd, .markdown-body tt, .markdown-body samp {
+          font-family: Menlo-Regular, Menlo, Monaco, Consolas, "Courier New", monospace;
+        }
+        .markdown-body code {
+          display: inline;
+          border: solid 1px #bfbfbf;
+          padding: 0.2em 0.5em;
+          font-size: 0.9em;
+          color: #424242;
+          background-color: white;
+        }
+        .markdown-body pre > code {
+          display: block;
+          border: solid 1px #bfbfbf;
+          padding: 0.7em 1em;
+          font-size: 0.9em;
+          overflow-x: auto;
+        }
+        .markdown-body mark {
+          color: inherit;
+          display: inline;
+          padding: 0.2em 0.5em;
+          background-color: #fcffc0;
+        }
+        .markdown-body figcaption {
+          text-align: center;
+        }
+        .markdown-body table {
+          color: #424242;
+          border-collapse: collapse;
+          background-color: white;
+          border-spacing: 2px;
+          font-size: 1em;
+          border: 1px;
+          border-spacing: 0;
+        }
+        .markdown-body th, .markdown-body td {
+          padding: 0.7em 1em;
+          font-size: 0.9em;
+          border: 1px solid #bfbfbf;
+        }
+        .markdown-body caption, .markdown-body th, .markdown-body td {
+          text-align: left;
+          font-weight: normal;
+          vertical-align: middle;
+        }
+        .markdown-body div[id^=mweb-chart-ele] svg {
+          background-color: white;
+        }
+        .markdown-body .footnotes > ol li {
+          text-indent: 0;
+        }
+        .markdown-body .footnotes > ol li::before {
+          float: left;
+        }
+        </style>
+        <style>.mweb-charts{background:#fff;}
+        body{ box-sizing: border-box;
+            margin: 0 auto;
+            padding: 28px}
+        @media print{
+            code,pre,pre code{
+                overflow: visible; word-wrap: break-word !important;
+            }
+            html,body{margin:0;padding:4px;}
+        }
+        
+        </style>
+        <script>window.MathJax = {     tex: { tags: 'ams', displayMath: [ ['\\[', '\\]'] ] },     startup: {     pageReady() {       return MathJax.startup.defaultPageReady().then(function () {          window.mweb_mathjax_ready_val = 'yes';          if(window.mweb_mathjax_ready !== undefined){ mweb_mathjax_ready(); }       });     }   }};document.addEventListener('DOMContentLoaded', function(event) {    if (typeof Prism != 'undefined') {         Prism.highlightAll();     }});window.mweb_mathjax_ready_val = '';function theMWebMathJaxRenderIsReady(key){ return window.mweb_mathjax_ready_val; }</script><script>document.addEventListener('DOMContentLoaded', function(event) {window.mweb_mathjax_ready_val = 'yes';})</script>
+        </head>
+<body data-new-gr-c-s-check-loaded="14.1071.0" data-gr-ext-installed="">
+
+<h1><strong>李海成</strong></h1>
+
+<h1></h1>
+
+<p><br>
+在读硕士, 生物信息, 内蒙古大学</p>
+
+<p>Email: lihaicheng7003@163.com
+Github: <a href="https://github.com/lihaicheng7003">https://github.com/lihaicheng7003</a></p>
+
+<p><img src="./lihaicheng_files/me.jpg" ,="" width="300"></p>
+
+<h2>SUMMARY</h2>
+<ul></ul>
+<p>目前就读于内蒙古大学，生物信息方向。主要方向是<strong>胚胎发育</strong>，也做过微生物。 </p>
 
 
-<head>
-    <meta charset="utf-8">
-    <meta name="keywords" content="生物信息">
-    <meta name="description" content="李海成的小站">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <meta name="renderer" content="webkit|ie-stand|ie-comp">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="referrer" content="no-referrer-when-downgrade">
-    <!-- Global site tag (gtag.js) - Google Analytics -->
 
-
-    <title>李海成</title>
-    <link rel="icon" type="image/png" href="/favicon.png">
-
-    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
-    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
-    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
-    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
-    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/matery.css">
-    <link rel="stylesheet" type="text/css" href="/css/my.css">
-
-    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
-
-<meta name="generator" content="Hexo 6.1.0"></head>
-
-
-
-
-<body>
-    <header class="navbar-fixed">
-    <nav id="headNav" class="bg-color nav-transparent">
-        <div id="navContainer" class="nav-wrapper container">
-            <div class="brand-logo">
-                <a href="/" class="waves-effect waves-light">
-                    
-                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
-                    
-                    <span class="logo-span">李海成</span>
-                </a>
-            </div>
-            
-
-<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
-<ul class="right nav-menu">
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/" class="waves-effect waves-light">
-      
-      <i class="fas fa-home" style="zoom: 0.6;"></i>
-      
-      <span>首页</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/tags" class="waves-effect waves-light">
-      
-      <i class="fas fa-tags" style="zoom: 0.6;"></i>
-      
-      <span>标签</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/categories" class="waves-effect waves-light">
-      
-      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
-      
-      <span>分类</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/archives" class="waves-effect waves-light">
-      
-      <i class="fas fa-archive" style="zoom: 0.6;"></i>
-      
-      <span>归档</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/about" class="waves-effect waves-light">
-      
-      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
-      
-      <span>关于</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/contact" class="waves-effect waves-light">
-      
-      <i class="fas fa-comments" style="zoom: 0.6;"></i>
-      
-      <span>留言板</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/friends" class="waves-effect waves-light">
-      
-      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
-      
-      <span>友情链接</span>
-    </a>
-    
-  </li>
-  
-  <li>
-    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
-      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
-    </a>
-  </li>
+<h2><a id="education" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>EDUCATION</h2>
+<ul></ul>
+<p><strong>内蒙古大学</strong> (2020.09-至今)<br>
+    在读硕士，生物信息学方向</p>
+<ul>
+    <li>研究方向: 胚胎发育</li>
+    <li>开发生物信息学机器学习预测、工具、平台。</li>
 </ul>
 
+<p><strong>南京理工大学</strong> (2015.09-2019.07)<br>
+    工学学士，生物工程</p>
+<ul>
+    <li>毕业设计: 金花茶天然产物分离</li>
+</ul>
+<h2><a id="technical-skills" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>TECHNICAL SKILLS</h2>
+<ul></ul>
+<p><strong>NGS 数据分析</strong></p>
+<ul>
+    <li>数据处理: WGS, ChIP-Seq, RNA-Seq, ATAC-Seq and WGBS</li>
+    <li>公共数据挖掘: GEO, Ensembl</li>
+</ul>
+<p><strong>编程</strong></p>
+<ul>
+    <li>python, R, Bash, SQL, Git</li>
+    <li>工作环境管理: Snakemake, Conda, Docker</li>
+    <li>linux 服务器操作与维护</li>
 
-<div id="mobile-nav" class="side-nav sidenav">
-
-    <div class="mobile-head bg-color">
-        
-        <img src="/medias/logo.png" class="logo-img circle responsive-img">
-        
-        <div class="logo-name">李海成</div>
-        <div class="logo-desc">
-            
-            李海成的小站
-            
-        </div>
-    </div>
-
-    <ul class="menu-list mobile-menu-list">
-        
-        <li class="m-nav-item">
-	  
-		<a href="/" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-home"></i>
-			
-			首页
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/tags" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-tags"></i>
-			
-			标签
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/categories" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-bookmark"></i>
-			
-			分类
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/archives" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-archive"></i>
-			
-			归档
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/about" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-user-circle"></i>
-			
-			关于
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/contact" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-comments"></i>
-			
-			留言板
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/friends" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-address-book"></i>
-			
-			友情链接
-		</a>
-          
-        </li>
-        
-        
-        <li><div class="divider"></div></li>
-        <li>
-            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
-                <i class="fab fa-github-square fa-fw"></i>Fork Me
-            </a>
-        </li>
-        
+</ul>
+   
+<h2><a id="publications" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>PUBLICATIONS<br></h2>
+<ul></ul>
+<blockquote>
+    <p>#, Co-first author;&nbsp;&nbsp;*, Corresponding author</p>
+    </blockquote>
+<ul>
+    <li>Yu Sun, <strong>Haicheng Li</strong>#, Lei Zheng, Jinzhao Li, Yan Hong, Pengfei Liang, Lai-Yu Kwok, Yongchun Zuo, Wenyi Zhang, Heping Zhang. (2021).iProbiotics: a machine learning platform for rapid identification of probiotic properties from whole-genome primary sequences. <em><strong>Briefings in Bioinformatics</strong></em>,Volume 23, Issue 1, January 2022, bbab477, https://doi.org/10.1093/bib/bbab477.</li>
+    <li>Liang Pengfei, Wang Hao, Liang Yuchao, Zhou Jian, <strong>Li Haicheng</strong> and Zuo Yongchun*. (2022).Feature-scML: an open-source Python package for the feature importance visualization of single-cell omics with machine learning, <em><strong>Current Bioinformatics</strong></em>, 17() . https://dx.doi.org/10.2174/1574893617666220608123804</li>
+    
     </ul>
-</div>
+<blockquote>
+    <p>Lasted updated on 2022-8-1</p>
+    </blockquote>
 
-
-        </div>
-
-        
-            <style>
-    .nav-transparent .github-corner {
-        display: none !important;
-    }
-
-    .github-corner {
-        position: absolute;
-        z-index: 10;
-        top: 0;
-        right: 0;
-        border: 0;
-        transform: scale(1.1);
-    }
-
-    .github-corner svg {
-        color: #0f9d58;
-        fill: #fff;
-        height: 64px;
-        width: 64px;
-    }
-
-    .github-corner:hover .octo-arm {
-        animation: a 0.56s ease-in-out;
-    }
-
-    .github-corner .octo-arm {
-        animation: none;
-    }
-
-    @keyframes a {
-        0%,
-        to {
-            transform: rotate(0);
-        }
-        20%,
-        60% {
-            transform: rotate(-25deg);
-        }
-        40%,
-        80% {
-            transform: rotate(10deg);
-        }
-    }
-</style>
-
-<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
-   data-tooltip="Fork Me" data-position="left" data-delay="50">
-    <svg viewBox="0 0 250 250" aria-hidden="true">
-        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
-        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
-              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
-        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
-              fill="currentColor" class="octo-body"></path>
-    </svg>
-</a>
-        
-    </nav>
-
-</header>
-
-    
-<style>
-    .carousel-control {
-        width: 45px;
-        height: 45px;
-        line-height: 55px;
-        border-radius: 45px;
-        background: transparent;
-        cursor: pointer;
-        z-index: 100;
-    }
-
-    #prev-cover {
-        position: absolute;
-        top: 48%;
-        left: 8px;
-    }
-
-    #next-cover {
-        position: absolute;
-        top: 48%;
-        right: 8px;;
-    }
-
-    #prev-cover i {
-        margin-right: 3px;
-    }
-
-    #next-cover i {
-        margin-left: 3px;
-    }
-
-    .carousel-control:hover {
-        background-color: rgba(0, 0, 0, .4);
-    }
-
-    .carousel-control i {
-        color: #fff;
-        font-size: 2.4rem;
-    }
-</style>
-
-
-
-<div class="carousel carousel-slider center index-cover" data-indicators="true" style="margin-top: -64px;">
-    
-
-    <div class="carousel-item  white-text bg-cover about-cover">
-        <div class="container">
-            <div class="row">
-    <div class="col s10 offset-s1 m8 offset-m2 l8 offset-l2">
-        <div class="brand">
-            <div class="title center-align">
-                
-                雪艇
-                
-            </div>
-
-            <div class="description center-align">
-                
-                <span id="subtitle"></span>
-                <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
-                <script>
-                    var typed = new Typed("#subtitle", {
-                        strings: [ 
-                            
-                                "从来没有真正的绝境, 只有心灵的迷途",
-                            
-                                "Never really desperate, only the lost of the soul",
-                            
-                        ],
-                        startDelay: 300,
-                        typeSpeed: 100,
-                        loop: true,
-                        backSpeed: 50,
-                        showCursor: true
-                    });
-                </script>
-                
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<script>
-    // 每天切换 banner 图.  Switch banner image every day.
-    var bannerUrl = "/medias/banner/" + new Date().getDay() + '.jpg';
-    $('.bg-cover').css('background-image', 'url(' + bannerUrl + ')');
-</script>
-
-
-
-            <div class="cover-btns">
-                <a href="#indexCard" class="waves-effect waves-light btn">
-                    <i class="fa fa-angle-double-down"></i>开始阅读
-                </a>
-
-                
-                    <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light btn" target="_blank">
-                        <i class="fab fa-github-alt"></i>Github
-                    </a>
-                
-            </div>
-            <div class="cover-social-link">
-    <a href="https://github.com/blinkfox" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
-        <i class="fab fa-github"></i>
-    </a>
-
-
-
-    <a href="mailto:1181062873@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
-        <i class="fas fa-envelope-open"></i>
-    </a>
-
-
-
-
-
-
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
-        <i class="fab fa-qq"></i>
-    </a>
-
-
-
-
-
-
-
-    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
-        <i class="fas fa-rss"></i>
-    </a>
-
-</div>
-        </div>
-    </div>
-
-    
-</div>
-
-<script>
-    $(function () {
-        let coverSlider = $('.carousel');
-
-        //用户触摸轮播自动 restartPlay 是否生效
-        let initUserPressedOrDraggedActive = false
-
-        //用户触摸轮播自动 restartPlay
-        function initUserPressedOrDragged(instance) {
-            setInterval(() => {
-                if (instance.pressed || instance.dragged) {
-                    // console.log('initUserPressedOrDragged: ',instance.pressed,instance.dragged)
-                    restartPlay()
-                }
-            }, 1000)
-        }
-
-        coverSlider.carousel({
-            duration: Number('120'),
-            fullWidth: true,
-            indicators: 'true' === 'true',
-            onCycleTo() {
-                if (!initUserPressedOrDraggedActive) {
-                    // console.log('initUserPressedOrDraggedActive')
-                    initUserPressedOrDragged(this)
-                    initUserPressedOrDraggedActive = true
-                }
-            },
-        })
-
-        let carouselIntervalId;
-        
-        // Loop to call the next cover article picture.
-        let autoCarousel = function () {
-            carouselIntervalId = setInterval(function () {
-                coverSlider.carousel('next');
-            }, 5000);
-        };
-        autoCarousel();
-        
-
-        function restartPlay() {
-            
-            clearInterval(carouselIntervalId);
-            autoCarousel();
-            
-        };
-
-        
-        // prev and next cover post.
-        $('#prev-cover').click(function () {
-            coverSlider.carousel('prev');
-            restartPlay();
-        });
-        $('#next-cover').click(function () {
-            coverSlider.carousel('next');
-            restartPlay();
-        });
-        
-    });
-</script>
-
-
-
-<main class="content">
-
-    
-    <div id="indexCard" class="index-card">
-        <div class="container ">
-            <div class="card">
-                <div class="card-content">
-                    
-                        <div class="dream">
-    
-    <div class="title center-align">
-        <i class="far fa-lightbulb"></i>&nbsp;&nbsp;我的梦想
-    </div>
-    
-    <div class="row">
-        <div class="col l8 offset-l2 m10 offset-m1 s10 offset-s1 center-align text">
-            不是每个人都应该像我这样去建造一座水晶大教堂，但是每个人都应该拥有自己的梦想，设计自己的梦想，追求自己的梦想，实现自己的梦想。梦想是生命的灵魂，是心灵的灯塔，是引导人走向成功的信仰。有了崇高的梦想，只要矢志不渝地追求，梦想就会成为现实，奋斗就会变成壮举，生命就会创造奇迹。——罗伯·舒乐
-        </div>
-    </div>
-</div>
-
-                    
-
-                    
-
-                    
-
-                    
-                    <div id="recommend-sections" class="recommend">
-                        
-
-
-
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
-    </div>
-    
-
-    
-
-    <!-- 所有文章卡片 -->
-    <article id="articles" class="container articles">
-        <div class="row article-row">
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2022/03/17/test-my-site/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="test_my_site">
-                            
-                            <span class="card-title">test_my_site</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-17
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-user fa-fw"></i>
-                                雪艇
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2022/03/15/hello-world/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
-                            
-                            <span class="card-title">Hello World</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hex
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-15
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-user fa-fw"></i>
-                                雪艇
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-        </div>
-    </article>
-
-</main>
-
-
-
-
-    <footer class="page-footer bg-color">
-    
-        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
-<style>
-    .aplayer .aplayer-lrc p {
-        
-        display: none;
-        
-        font-size: 12px;
-        font-weight: 700;
-        line-height: 16px !important;
-    }
-
-    .aplayer .aplayer-lrc p.aplayer-lrc-current {
-        
-        display: none;
-        
-        font-size: 15px;
-        color: #42b983;
-    }
-
-    
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
-        left: -66px !important;
-    }
-
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
-        left: 0px !important;
-    }
-
-    
-</style>
-<div class="">
-    
-    <div class="row">
-        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
-                   server="netease"
-                   type="playlist"
-                   id="503838841"
-                   fixed='true'
-                   autoplay='false'
-                   theme='#42b983'
-                   loop='all'
-                   order='random'
-                   preload='auto'
-                   volume='0.7'
-                   list-folded='true'
-        >
-        </meting-js>
-    </div>
-</div>
-
-<script src="/libs/aplayer/APlayer.min.js"></script>
-<script src="/libs/aplayer/Meting.min.js"></script>
-
-    
-
-    <div class="container row center-align"
-         style="margin-bottom: 0px !important;">
-        <div class="col s12 m8 l8 copy-right">
-            Copyright&nbsp;&copy;
-            
-                <span id="year">2019-2022</span>
-            
-            <a href="/about" target="_blank">雪艇</a>
-            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
-            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
-            <br>
-            
-            
-            
-                
-            
-            
-                <span id="busuanzi_container_site_pv">
-                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
-                    <span id="busuanzi_value_site_pv" class="white-color"></span>
-            </span>
-            
-            
-                <span id="busuanzi_container_site_uv">
-                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
-                    <span id="busuanzi_value_site_uv" class="white-color"></span>
-            </span>
-            
-            <br>
-
-            <!-- 运行天数提醒. -->
-            
-            <br>
-            
-        </div>
-        <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/blinkfox" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
-        <i class="fab fa-github"></i>
-    </a>
-
-
-
-    <a href="mailto:1181062873@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
-        <i class="fas fa-envelope-open"></i>
-    </a>
-
-
-
-
-
-
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
-        <i class="fab fa-qq"></i>
-    </a>
-
-
-
-
-
-
-
-    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
-        <i class="fas fa-rss"></i>
-    </a>
-
-</div>
-    </div>
-</footer>
-
-<div class="progress-bar"></div>
-
-
-    <!-- 搜索遮罩框 -->
-<div id="searchModal" class="modal">
-    <div class="modal-content">
-        <div class="search-header">
-            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
-            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
-                   class="search-input">
-        </div>
-        <div id="searchResult"></div>
-    </div>
-</div>
-
-<script type="text/javascript">
-$(function () {
-    var searchFunc = function (path, search_id, content_id) {
-        'use strict';
-        $.ajax({
-            url: path,
-            dataType: "xml",
-            success: function (xmlResponse) {
-                // get the contents from search data
-                var datas = $("entry", xmlResponse).map(function () {
-                    return {
-                        title: $("title", this).text(),
-                        content: $("content", this).text(),
-                        url: $("url", this).text()
-                    };
-                }).get();
-                var $input = document.getElementById(search_id);
-                var $resultContent = document.getElementById(content_id);
-                $input.addEventListener('input', function () {
-                    var str = '<ul class=\"search-result-list\">';
-                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
-                    $resultContent.innerHTML = "";
-                    if (this.value.trim().length <= 0) {
-                        return;
-                    }
-                    // perform local searching
-                    datas.forEach(function (data) {
-                        var isMatch = true;
-                        var data_title = data.title.trim().toLowerCase();
-                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
-                        var data_url = data.url;
-                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
-                        var index_title = -1;
-                        var index_content = -1;
-                        var first_occur = -1;
-                        // only match artiles with not empty titles and contents
-                        if (data_title !== '' && data_content !== '') {
-                            keywords.forEach(function (keyword, i) {
-                                index_title = data_title.indexOf(keyword);
-                                index_content = data_content.indexOf(keyword);
-                                if (index_title < 0 && index_content < 0) {
-                                    isMatch = false;
-                                } else {
-                                    if (index_content < 0) {
-                                        index_content = 0;
-                                    }
-                                    if (i === 0) {
-                                        first_occur = index_content;
-                                    }
-                                }
-                            });
-                        }
-                        // show search results
-                        if (isMatch) {
-                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
-                            var content = data.content.trim().replace(/<[^>]+>/g, "");
-                            if (first_occur >= 0) {
-                                // cut out 100 characters
-                                var start = first_occur - 20;
-                                var end = first_occur + 80;
-                                if (start < 0) {
-                                    start = 0;
-                                }
-                                if (start === 0) {
-                                    end = 100;
-                                }
-                                if (end > content.length) {
-                                    end = content.length;
-                                }
-                                var match_content = content.substr(start, end);
-                                // highlight all keywords
-                                keywords.forEach(function (keyword) {
-                                    var regS = new RegExp(keyword, "gi");
-                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
-                                });
-
-                                str += "<p class=\"search-result\">" + match_content + "...</p>"
-                            }
-                            str += "</li>";
-                        }
-                    });
-                    str += "</ul>";
-                    $resultContent.innerHTML = str;
-                });
-            }
-        });
-    };
-
-    searchFunc('/search.xml', 'searchInput', 'searchResult');
-});
-</script>
-
-    <!-- 回到顶部按钮 -->
-<div id="backTop" class="top-scroll">
-    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
-        <i class="fas fa-arrow-up"></i>
-    </a>
-</div>
-
-
-    <script src="/libs/materialize/materialize.min.js"></script>
-    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
-    <script src="/libs/aos/aos.js"></script>
-    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
-    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
-    <script src="/js/matery.js"></script>
-
-    
-
-    
-
-    <!-- 雪花特效 -->
-    
-
-    <!-- 鼠标星星特效 -->
-    
-
-     
-        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
-        <script src="/libs/others/TencentCaptcha.js"></script>
-        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
-    
-
-    <!-- Baidu Analytics -->
-
-    <!-- Baidu Push -->
-
-<script>
-    (function () {
-        var bp = document.createElement('script');
-        var curProtocol = window.location.protocol.split(':')[0];
-        if (curProtocol === 'https') {
-            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-        } else {
-            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-        }
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(bp, s);
-    })();
-</script>
-
-    
-    <script src="/libs/others/clicklove.js" async="async"></script>
-    
-    
-    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
-    
-
-    
-
-    
-
-    <!--腾讯兔小巢-->
-    
-    
-
-    
-
-    
-
-    
-    <script src="/libs/instantpage/instantpage.js" type="module"></script>
-    
-
-</body>
-
-</html>
